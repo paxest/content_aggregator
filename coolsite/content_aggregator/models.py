@@ -13,7 +13,7 @@ class Article(models.Model):
     is_published = models.BooleanField(default=True, verbose_name='Публикация')
     source = models.CharField(blank=True, max_length=255, verbose_name='Источник')
     views = models.IntegerField(default=0, verbose_name='Количество просмотров')
-    category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, verbose_name='Категория')
 
     def __str__(self):
         return self.title

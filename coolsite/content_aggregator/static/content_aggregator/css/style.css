@@ -525,6 +525,7 @@ p {
     color:rgba(255, 255, 255, 0.3)
 }
 
+.articles__source,
 .articles__btn-read {
     font-family: 'Montserrat', sans-serif;
     font-size: 17px;
@@ -707,6 +708,9 @@ p {
     opacity: 1;
 }
 
+.background-none {
+    background: none;
+}
 
 
 

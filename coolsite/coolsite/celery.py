@@ -18,6 +18,14 @@ app.conf.beat_schedule = {
         'task': 'content_aggregator.tasks.interfax_parser',
         'schedule': crontab(),
     },
+    'scraping-task-two-min': {
+        'task': 'content_aggregator.tasks.lenta_parser',
+        'schedule': crontab(),
+    },
+    'scraping-task-three-min': {
+        'task': 'content_aggregator.tasks.autoru_parser',
+        'schedule': crontab(),
+    },
     # # executes every 15 minutes
     # 'scraping-task-fifteen-min': {
     #     'task': 'tasks.hackernews_rss',

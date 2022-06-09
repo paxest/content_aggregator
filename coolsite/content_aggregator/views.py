@@ -27,7 +27,6 @@ class ContentHome(LoginRequiredMixin, DataMixin, ListView):
 
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        print(*zip(['asd', 'qwe'], ['fg', 'wer']))
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Главная страница')
         return dict(list(context.items()) + list(c_def.items()))
@@ -150,7 +149,6 @@ class UserProfileUpdateView(DataMixin, UpdateView):
     slug_field = "username"
    
     def get_success_url(self):
-        print(self.kwargs)
         return reverse_lazy('user_profile', kwargs={'slug': self.kwargs['slug']})
 
     def get_context_data(self, **kwargs):

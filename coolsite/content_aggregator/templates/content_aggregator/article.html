@@ -1,7 +1,7 @@
 {% extends 'content_aggregator/base.html' %}
 
 {% block content %}
-    <div class="articles__item">
+    <div class="articles__item background-none">
         <div class="articles__header">
             <div class="articles__category">
                 {% autoescape off %}{{ article.category.icon }}{% endautoescape %}
@@ -15,7 +15,7 @@
             <br>
             <div class="articles__footer">
                 <p class="articles__views"><i class="fa-solid fa-eye"></i><span class="span-margin">{{ article.views }}</span></p>
-                <a href="{{ article.source }}" target="_blank">Источник</a>
+                <a href="{{ article.source }}" target="_blank" class="articles__source">Источник</a>
             </div>
         </div>
     </div>
