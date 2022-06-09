@@ -1,0 +1,21 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+
+<div class="login-form">
+    <h2 class="login-form__title">{{ title }}</h2>
+    <form method="post" class="login-form__form" autocomplete="off">
+        {% csrf_token %}
+        {% for f in form %}
+        <div class="login-form__item"><label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}</div>
+        <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+
+        <div class="form-error">{{ form.non_field_errors }}</div>
+
+        <button type="submit" class="login-form__btn button">Войти</button>
+        <a href="{% url 'registration' %}" class="login-form__sign-up-link">Регистрация</a>
+    </form>
+</div>
+
+{% endblock %}

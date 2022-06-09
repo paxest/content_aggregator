@@ -1,0 +1,91 @@
+{% load static %}
+{% load content_aggregator_tags %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" type="text/css" href="{% static 'content_aggregator/css/style.css' %}"/>
+        <link href="{% static 'content_aggregator/css/favicon.svg' %}" rel="icon" type="image/svg+xml" />
+
+        <script src="https://kit.fontawesome.com/91c91be1b6.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+        
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <header class="header">
+            <button class="header__burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+            
+
+            <nav class="header__nav">
+                {% block main_menu %}
+                <ul class="main-menu">
+                    {% for m in menu %}
+                    <li class="main-menu__item">
+                        <a href="{% url m.url_name %}" class="main-menu__link {% if m.url_name in request.path%}main-menu__link_selected{% endif %}">
+                            {% autoescape off %}
+                            {{ m.icon }}<span class="main-menu__text">{{ m.title }}</span>
+                            {% endautoescape %}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endblock %}
+            </nav>
+
+            <div class="header__logo">
+                <a href="{% url 'home' %}">Агрегатор контента</a>
+            </div>
+            
+            <div class="header__articles" data-tooltip="Количество статей на сайте">
+                <p><i class="fa-regular fa-note-sticky"></i><span class="span-margin">{{ articles_count.count }}</span></p>
+            </div>
+
+            <div class="header__login">
+                {% if request.user.is_authenticated %}
+                    <a class="header__profile"><i class="fa-solid fa-user"></i><span class="span-margin">{{ user.username }}</span></a>
+                    <ul class="header__profile-list">
+                        <li class="header__profile-list-item">
+                            <a href="{% url 'user_profile' user %}" class="header__profile-list-link">Профиль</a>
+                        </li>
+                        <li class="header__profile-list-item">
+                            <a href="{% if request.user.userprofile %}
+                                        {% url 'edit_user_categories' user %}
+                                     {% else %}
+                                        {% url 'create_user_categories' %}
+                                     {% endif %}" class="header__profile-list-link">Мои категории</a>
+                        </li>
+
+                        <li class="header__profile-list-item">
+                            <a href="{% url 'logout' %}" class="header__profile-list-link">Выйти</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <a href="{% url 'login' %}" class="header__profile">Вход</a>
+                {% endif %}
+            </div>
+        </header>
+        
+        <main class="main">
+            <div class="main__wrapper">
+                <div class="main__content-wrapper">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer-container">
+
+        </footer>
+        <script src="{% static 'content_aggregator/js/script.js' %}"></script>
+    </body>
+</html>

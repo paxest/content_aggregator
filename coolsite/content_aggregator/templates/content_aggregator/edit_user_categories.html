@@ -1,0 +1,26 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+    <form method="POST" action="" class="categories__wrapper">
+        {% csrf_token %}
+        <div class="categories__content">
+            {% for choice in form.user_category %}
+                <div class="categories__item">
+                    <input  type="checkbox" id="{{ choice.id_for_label }}"
+                            class="categories__custom-checkbox"
+                            name="user_category"
+                            value="{{ choice.data.value }}"
+                            {% if choice.data.selected %} checked {% endif %}/>
+                    <label class="categories__item-info {% if choice.data.selected %} categories__item-info_selected {% endif %}" for="{{ choice.id_for_label }}">
+                        {% autoescape off %}
+                        {{ choice.data.value.instance.icon }}
+                        {% endautoescape %}
+                        <span class="categories__name">{{ choice.data.value.instance.name }}</span>
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button class="button" type="submit">Обновить</button>
+    </form>
+{% endblock %}

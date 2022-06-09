@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+
+{%block content%}
+     <form action ="{%url 'home'%}" method ="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.name != 'Event' %}
+                <p><label class="form-label" for="{{ field.id_for_label }}">{{field.label}}: </label>{{ field }}</p>
+            {% endif %}
+        {% endfor %}
+        <div class="multiselect">
+
+            <div class="selectBox" onclick="showCheckboxes()">
+              <select>
+                <option>Select an option</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes">
+                {% for choice in form.Event %}
+                <label for="{{choice.id_for_label}}">
+                    <input type = "checkbox" id = "{{choice.id_for_label}}" name = "Event" value = "{{choice.data.value}}" {% if choice.data.value in context %} checked {% endif %}/>
+                    {{choice.data.selected}}
+                    {{choice.data.value}}
+                </label>
+                {% endfor %}
+                <div class="btn btn-primary" id = "addSelect">Выделить все</div>
+                <div class="btn btn-primary" id = "removeSelect">Снять выделение</div>
+
+            </div>
+        </div>
+        <input type="submit"  value="Применить">
+
+    </form>
+{%endblock%}

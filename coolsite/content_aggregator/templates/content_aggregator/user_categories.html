@@ -1,0 +1,8 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+    {% for x in userprofile.user_category.all %}
+        {{ x }}
+    {% endfor %}
+<a href="{% url 'edit_user_profile' userprofile.user.username %}">Ред</a>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+    <div class="articles__wrapper">
+        <ul class="categories-list">
+            {% if category_selected == 0 %}
+                <li class="categories-list__item">
+                    <a class="categories-list__link categories-list__link_selected">
+                        <i class="fa-solid fa-layer-group"></i><span class="span-margin">Все категории</span>
+                    </a>
+                </li>
+            {% else %}
+                <li class="categories-list__item">
+                    <a href="{% url 'home' %}" class="categories-list__link">
+                        <i class="fa-solid fa-layer-group"></i><span class="span-margin">Все категории</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% autoescape off %}
+            {% for category in user_categories %}
+                {% if category.article__count > 0 %}
+                    {% if category.pk == category_selected %}
+                        <li class="categories-list__item">
+                            <a class="categories-list__link categories-list__link_selected">
+                                {{ category.icon }} <span class="span-margin">{{ category.name }}</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="categories-list__item">
+                            <a href="{{ category.get_absolute_url }}" class="categories-list__link">
+                                {{ category.icon }} <span class="span-margin">{{ category.name }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% endautoescape %}
+        </ul>
+
+        <div class="articles__content">
+            <form method="get" class="articles__ordering">
+                <label><i class="fa-solid fa-clock-rotate-left"></i><span class="span-margin">По актуальности</span><input type="submit" name="orderby" value="-time_create"></label>
+                <label><i class="fa-solid fa-fire"></i><span class="span-margin">По популярности</span><input type="submit" name="orderby" value="-views"></label>
+            </form>
+
+            {% for article in articles %}
+            <div class="articles__item">
+                <div class="articles__header">
+                    <div class="articles__category">
+                        {% autoescape off %}{{ article.category.icon }}{% endautoescape %}
+                        <span class="category-name span-margin">{{ article.category }}</span>
+                    </div>
+                    <span class="articles__date">{{ article.time_create|date:"d-m-Y H:i:s" }}</span>
+                </div>
+                <div class="articles__body">
+                    <h3 class="articles__headline">{{ article.title }}</h3>
+                    <p class="articles__text">{{ article.content|truncatewords:30 }}</p>
+                </div>
+                <div class="articles__footer">
+                    <p class="articles__views"><i class="fa-solid fa-eye"></i><span class="span-margin">{{ article.views }}</span></p>
+                    <a href="{% url 'article' article.slug %}" class="articles__btn-read">Читать</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if page_obj.has_other_pages %}
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <div class="pagination__item">
+                        <a href="?page={{ page_obj.previous_page_number }}" class="pagination__link">&lt;</a>
+                    </div>
+                {% endif %}
+
+                {% for p in paginator.page_range %}
+                    {% if page_obj.number == p %}
+                        <div class="pagination__item pagination__item_selected">
+                            <span class="pagination__current-link">{{ p }}<span>
+                        </div>
+                    {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                        <div class="pagination__item">
+                            <a href="?page={{ p }}" class="pagination__link">{{ p }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <div class="pagination__item">
+                        <a href="?page={{ page_obj.next_page_number }}" class="pagination__link">&gt;</a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+    <form method="post" class="profile">
+        {% csrf_token %}
+        <h2 class="profile__title">Профиль {{ user.username }}</h2>
+        
+        {% for x in form %}
+            <div class="profile__item">
+                <label for="{{ x.id_for_label }}" class="profile__text">{{ x.label }}</label>
+                {{ x }}
+            </div>        
+        {% endfor %}
+        
+        {{form.errors}}
+
+        <div class="profile__item">
+            <button class="button" type="submit">Изменить</button>
+        </div>
+    </form>
+{% endblock content %}

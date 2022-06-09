@@ -1,0 +1,22 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+    <div class="articles__item">
+        <div class="articles__header">
+            <div class="articles__category">
+                {% autoescape off %}{{ article.category.icon }}{% endautoescape %}
+                <span class="category-name span-margin">{{ article.category }}</span>
+            </div>
+            <span class="articles__date">{{ article.time_create|date:"d-m-Y H:i:s" }}</span>
+        </div>
+        <div class="articles__body">
+            <h3 class="articles__headline">{{ article.title }}</h3>
+            <p class="articles__text_mw">{{ article.content|linebreaksbr }}</p>
+            <br>
+            <div class="articles__footer">
+                <p class="articles__views"><i class="fa-solid fa-eye"></i><span class="span-margin">{{ article.views }}</span></p>
+                <a href="{{ article.source }}" target="_blank">Источник</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

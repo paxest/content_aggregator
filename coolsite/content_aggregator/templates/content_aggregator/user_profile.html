@@ -1,0 +1,27 @@
+{% extends 'content_aggregator/base.html' %}
+
+{% block content %}
+    <div class="profile">
+        <h2 class="profile__title">Профиль {{ user_profile.username }}</h2>
+        <div class="profile__item">
+            <p class="profile__text">Имя пользователя</p>
+            <p class="profile__text">{{ user_profile.username }}</p>
+        </div>
+        <div class="profile__item">
+            <p class="profile__text">Имя</p>
+            <p class="profile__text">{{ user_profile.first_name }}</p>
+        </div>
+        <div class="profile__item">
+            <p class="profile__text">Фамилия</p>
+            <p class="profile__text">{{ user_profile.last_name }}</p>
+        </div>
+        <div class="profile__item">
+            <p class="profile__text">Email</p>
+            <p class="profile__text">{{ user_profile.email }}</p>
+        </div>
+        <div class="profile__item">
+            <a href="{% url 'edit_user_profile' user %}" class="profile__link">Изменить</a>
+            <a href="{% url 'logout' %}" class="profile__link">Выйти</a>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% autoescape off %}
+{% for category in categories %}
+    {% if category.pk == category_selected %}
+    <li><a class="selected">{{ category.icon }} {{ category.name }}</a></li>
+    {% else %}
+    <li><a href="{{ category.get_absolute_url }}">{{ category.icon }} {{ category.name }}</a></li>
+    {% endif %}
+{% endfor %}
+{% endautoescape %}
