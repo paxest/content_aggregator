@@ -23,7 +23,7 @@ from content_aggregator.views import *
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', include('content_aggregator.urls')),
-    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    # path('api/v1/drf-auth/', include('rest_framework.urls')),
     path('api/v1/articles/', ArticleAPIList.as_view(), name='api'),
     path('api/v1/articles/<int:pk>/', ArticleAPIUpdate.as_view()),
     path('api/v1/articles_delete/<int:pk>/', ArticleAPIDestroy.as_view()),

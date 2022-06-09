@@ -1,31 +1,23 @@
-// profile script
-//const profileButton = document.querySelector('.header__profile');
-//const profileList = document.querySelector('.header__profile-list');
-//
-//profileButton.addEventListener("click", function() {
-//    if (profileList.style.display = 'none') {
-//        profileList.style.display = 'none';
-//    } else {
-//        profileList.style.display = 'block';
-//    }
-//});
-
 // menu script
 const menuButton = document.querySelector('.header__burger');
 const menu = document.querySelector('.header__nav');
 
 menuButton.addEventListener("click", function() {
-
+    let width = document.documentElement.clientWidth;
+    let menuItems = menu.querySelectorAll('.main-menu__text')
+    
     if (window.getComputedStyle(menu).display == 'none') {
         menu.style.display = 'flex'
     }
-    let menuItems = menu.querySelectorAll('.main-menu__text')
     
     if (menuButton.classList.contains('active')) {
         menuItems.forEach(item => item.style.display = 'none');
         menuButton.classList.remove('active')
         menu.classList.remove('active')
-        menu.style.display = 'none'
+        if (width <= 650) {
+            menu.style.display = 'none'
+            console.log(width)
+        }
     } else {
         menuItems.forEach(item => item.style.display = 'inline-block');
         menuButton.classList.add('active')

@@ -193,7 +193,7 @@ def show_contacts(request):
 
 # API
 class ArticleAPIList(generics.ListCreateAPIView):
-    queryset = Article.objects.all()
+    queryset = Article.objects.all()[:5]
     serializer_class = ArticleSerializer
     # permission_classes = (IsAuthenticatedOrReadOnly,)
 

@@ -715,13 +715,17 @@ p {
 
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
     .header__logo {
         display: none;
     }
 
     .header__articles {
         margin-left: 0;
+    }
+
+    .header__nav {
+        display: none;
     }
 
     .main__wrapper {
@@ -766,5 +770,9 @@ p {
         color: rgba(255, 255, 255, 0.7);
     
         border-radius: 50%;
+    }
+
+    .pagination__item_selected {
+        background: none;
     }
 }

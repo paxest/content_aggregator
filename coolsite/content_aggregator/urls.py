@@ -6,7 +6,7 @@ from .views import *
 urlpatterns = [
     path('home/', ContentHome.as_view(), name='home'),
     path('about/', AboutView.as_view(), name='about'),
-    path('api/', APIView.as_view(), name='api'),
+    # path('api/', APIView.as_view(), name='api'),
     path('contacts/', show_contacts, name='contacts'),
 
     path('registration/', RegistrationUser.as_view(), name='registration'),
@@ -22,7 +22,7 @@ urlpatterns = [
     path('article/<slug:article_slug>/', ArticleDetail.as_view(), name='article'),
     path('category/<slug:category_slug>', ContentCategory.as_view(), name='category'),
     
-    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    # path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    # path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
